@@ -1,0 +1,15 @@
+<%= javascript_include_tag 'application' %>
+<h1>My Tasks</h1>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= link_to task.title, task_path(task) %>
+      <%= form_with model: task, url: destroy_task_path(task), method: :delete, data: {turbo_method: :delete, turbo_confirm: 'Êtes-vous sûr de vouloir supprimer cette tâche ?' } do |form| %>
+        <%= form.submit "Supprimer", class: "delete-button" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Add task", tasks_new_path %>
